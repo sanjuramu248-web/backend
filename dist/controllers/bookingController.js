@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createBooking = void 0;
-const BookingModel_1 = require("../models/BookingModel");
+const bookingModel_1 = require("../models/bookingModel");
 const experinceModel_1 = require("../models/experinceModel");
 const createBooking = async (req, res) => {
     try {
@@ -23,7 +23,7 @@ const createBooking = async (req, res) => {
             });
         }
         // Create booking
-        const booking = new BookingModel_1.Booking({
+        const booking = new bookingModel_1.Booking({
             userName,
             email,
             experienceId,

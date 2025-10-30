@@ -49,7 +49,6 @@ const BookingSchema = new mongoose_1.Schema({
     promoCode: { type: String },
     status: { type: String, enum: ["confirmed", "failed"], default: "confirmed" },
 }, { timestamps: true });
-// Prevent double booking of same slot
 BookingSchema.index({ experienceId: 1, date: 1, time: 1, email: 1 }, { unique: true });
 exports.Booking = mongoose_1.default.model("Booking", BookingSchema);
-//# sourceMappingURL=BookingModel.js.map
+//# sourceMappingURL=bookingModel.js.map

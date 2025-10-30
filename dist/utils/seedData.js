@@ -5,7 +5,13 @@ const experinceModel_1 = require("../models/experinceModel");
 const promoModel_1 = require("../models/promoModel");
 const seedData = async () => {
     try {
-        // Clear existing data
+        const experienceCount = await experinceModel_1.Experience.countDocuments();
+        const promoCount = await promoModel_1.Promo.countDocuments();
+        if (experienceCount > 0 && promoCount > 0) {
+            console.log("Sample data already exists, skipping seeding");
+            return;
+        }
+        // Clear existing data only if empty
         await experinceModel_1.Experience.deleteMany({});
         await promoModel_1.Promo.deleteMany({});
         // Sample experiences
@@ -28,7 +34,7 @@ const seedData = async () => {
                 description: "Experience breathtaking mountain views and hiking trails with expert guides.",
                 location: "Swiss Alps",
                 price: 199,
-                imageUrl: "https://images.unsplash.com/photo-1464822759844-d150f39b8b3c?w=400",
+                imageUrl: "https://www.southernliving.com/thmb/lgkHle7FJE3vnDlLAYl-VU-mbH0=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-1468908187-79e55dbe8078404b83d076e0fa5fcccf.jpg",
                 slots: [
                     { date: "2024-11-03", time: "9:00 AM", availableSeats: 8 },
                     { date: "2024-11-03", time: "1:00 PM", availableSeats: 6 },

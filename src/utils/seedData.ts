@@ -1,8 +1,18 @@
+import mongoose from "mongoose";
 import { Experience } from "../models/experinceModel";
 import { Promo } from "../models/promoModel";
+import { connectDB } from "../db";
 
 export const seedData = async () => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      const mongoUri = process.env.MONGO_URI;
+      if (!mongoUri) {
+        throw new Error("MONGO_URI environment variable is required");
+      }
+      await connectDB(mongoUri);
+    }
+
     const experienceCount = await Experience.countDocuments();
     const promoCount = await Promo.countDocuments();
 
@@ -11,9 +21,11 @@ export const seedData = async () => {
       return;
     }
 
-    // Clear existing data only if empty
+    // Always clear and reseed for testing
+    console.log("Clearing existing data...");
     await Experience.deleteMany({});
     await Promo.deleteMany({});
+    console.log("Data cleared successfully");
 
     // Sample experiences
     const experiences = [
@@ -72,19 +84,22 @@ export const seedData = async () => {
     ];
 
     // Sample promo codes
+    const futureDate = new Date();
+    futureDate.setFullYear(futureDate.getFullYear() + 1); // 1 year from now
+
     const promos = [
       {
         code: "SAVE10",
         discountType: "percentage",
         amount: 10,
-        expiresAt: new Date("2024-12-31"),
+        expiresAt: futureDate,
         isActive: true,
       },
       {
         code: "FLAT100",
         discountType: "flat",
         amount: 100,
-        expiresAt: new Date("2024-12-31"),
+        expiresAt: futureDate,
         isActive: true,
       },
     ];
@@ -93,6 +108,7 @@ export const seedData = async () => {
     await Promo.insertMany(promos);
 
     console.log("Sample data seeded successfully");
+    console.log(`Seeded ${experiences.length} experiences and ${promos.length} promo codes`);
   } catch (error) {
     console.error("Error seeding data:", error);
   }

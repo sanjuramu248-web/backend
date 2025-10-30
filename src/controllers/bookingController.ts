@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Booking } from "../models/BookingModel";
+import { Booking } from "../models/bookingModel";
 import { Experience } from "../models/experinceModel";
 
 export const createBooking = async (req: Request, res: Response) => {

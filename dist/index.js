@@ -9,11 +9,12 @@ const db_1 = require("./db");
 const seedData_1 = require("./utils/seedData");
 dotenv_1.default.config();
 const mongoUri = process.env.MONGO_URI;
+const port = process.env.PORT || 8000;
 (0, db_1.connectDB)(mongoUri)
     .then(async () => {
     await (0, seedData_1.seedData)();
-    app_1.app.listen(process.env.PORT, () => {
-        console.log("server is running on port", process.env.PORT);
+    app_1.app.listen(port, () => {
+        console.log("server is running on port", port);
     });
 })
     .catch((err) => {
