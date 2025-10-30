@@ -6,13 +6,14 @@ import { seedData } from "./utils/seedData";
 dotenv.config()
 
 const mongoUri = process.env.MONGO_URI;
+const port = process.env.PORT || 8000;
 
 connectDB(mongoUri!)
     .then(async () => {
         await seedData();
 
-        app.listen(process.env.PORT, () => {
-            console.log("server is running on port", process.env.PORT)
+        app.listen(port, () => {
+            console.log("server is running on port", port)
         })
     })
     .catch((err: any) => {
