@@ -111,5 +111,17 @@ export const seedData = async () => {
     console.log(`Seeded ${experiences.length} experiences and ${promos.length} promo codes`);
   } catch (error) {
     console.error("Error seeding data:", error);
+    process.exit(1);
   }
 };
+
+// Execute seeding when this file is run directly
+if (require.main === module) {
+  seedData().then(() => {
+    console.log("Seeding completed successfully");
+    process.exit(0);
+  }).catch((error) => {
+    console.error("Seeding failed:", error);
+    process.exit(1);
+  });
+}
