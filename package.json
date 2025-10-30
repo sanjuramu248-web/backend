@@ -7,7 +7,6 @@
     "dev": "nodemon",
     "build": "tsc",
     "start": "node dist/index.js",
-    "render-postbuild": "npm run build",
     "seed": "ts-node src/utils/seedData.ts"
   },
   "keywords": [],
