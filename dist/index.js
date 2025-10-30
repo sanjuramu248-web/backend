@@ -6,13 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 const app_1 = require("./app");
 const db_1 = require("./db");
-const seedData_1 = require("./utils/seedData");
 dotenv_1.default.config();
 const mongoUri = process.env.MONGO_URI;
 const port = process.env.PORT || 8000;
 (0, db_1.connectDB)(mongoUri)
-    .then(async () => {
-    await (0, seedData_1.seedData)();
+    .then(() => {
     app_1.app.listen(port, () => {
         console.log("server is running on port", port);
     });

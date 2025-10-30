@@ -117,6 +117,7 @@ export const seedData = async () => {
 
 // Execute seeding when this file is run directly
 if (require.main === module) {
+  require('dotenv').config();
   seedData().then(() => {
     console.log("Seeding completed successfully");
     process.exit(0);
