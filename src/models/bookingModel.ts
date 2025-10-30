@@ -30,6 +30,7 @@ const BookingSchema = new Schema<IBooking>(
   { timestamps: true }
 );
 
+// Prevent double booking of same slot
 BookingSchema.index({ experienceId: 1, date: 1, time: 1, email: 1 }, { unique: true });
 
 export const Booking = mongoose.model<IBooking>("Booking", BookingSchema);
