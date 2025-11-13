@@ -8,7 +8,7 @@ import promoRoutes from "./routes/promoRoutes";
 const app = express();
 
 app.use(cors({
-    origin: true,
+    origin: "https://nexora-project-tipf.vercel.app/",
     credentials: true
 }))
 app.use(cookieParser())
